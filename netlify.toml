@@ -4,6 +4,10 @@
   functions = "netlify/functions"
   publish = "public"
 
+[context.production.environment]
+  NETLIFY_KAKAO_MAP_API_KEY = "From netlify.toml"
+  NETLIFY_KAKAO_REST_API_KEY = "From netlify.toml"
+
   ## Uncomment to use this redirect for Single Page Applications like create-react-app.
   ## Not needed for static site generators.
   [[redirects]]
