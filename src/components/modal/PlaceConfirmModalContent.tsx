@@ -35,6 +35,7 @@ export function PlaceConfirmModalContent() {
       x: center.getX(),
       y: center.getY(),
     }))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, isFetching, setCurrentPlace])
 
   return (
