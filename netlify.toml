@@ -2,7 +2,7 @@
 [build]
   command = "CI= yarn run build"
   functions = "netlify/functions"
-  publish = "public"
+  publish = "./build"
 
 [context.production.environment]
   NETLIFY_KAKAO_MAP_API_KEY = "From netlify.toml"
