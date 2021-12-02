@@ -4,7 +4,7 @@ import { restaurantDetailsQuery } from './queries'
 import { Restaurant, Restaurants } from '../types'
 
 const FETCH_PER_PAGE = 50
-const FETCH_LIMIT = 200 + FETCH_PER_PAGE
+const FETCH_LIMIT = FETCH_PER_PAGE
 
 const url = 'https://pcmap-api.place.naver.com/graphql'
 const client = new GraphQLClient(url)
