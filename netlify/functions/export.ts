@@ -1,6 +1,8 @@
 import { Handler } from '@netlify/functions'
 import { getRestaurants } from '../graphql/naver-place'
 import { toExcelFromFromRestaurants } from '../utils'
+import { mapSeries } from 'bluebird'
+import { Restaurant } from '../types'
 
 type Place = {
   x: number
@@ -14,13 +16,15 @@ type Payload = {
 
 export const handler: Handler = async (event, context) => {
   const payload: Payload = JSON.parse(event.body!)
-  const rows = await Promise.all(
-    payload.places.map(async ({ x, y, place }) => {
-      return await getRestaurants(place, x, y)
-    })
-  )
+  const rows = await mapSeries(payload.places, ({ x, y, place }) => {
+    return getRestaurants(place, x, y)
+  })
+  // const rows = await Promise.all(
+  //   payload.places.map(async ({ x, y, place }) => {
+  //     return await getRestaurants(place, x, y)
+  //   })
+  // )
 
-  console.log(rows)
   const buffer = await toExcelFromFromRestaurants(rows)
 
   return {
