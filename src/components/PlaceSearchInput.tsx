@@ -1,8 +1,8 @@
-import { ReactComponent as SearchIcon } from '@/assets/icons/search.svg'
 import { useForm } from 'react-hook-form'
 import { useSetRecoilState } from 'recoil'
 import { confirmModalState, currentPlaceState } from '@/stores'
 import { useEffect } from 'react'
+import { SearchIcon } from '@/components/SearchIcon'
 
 const INPUT_PLACEHOLDER = "'이태원 맛집'과 같은 키워드로 검색하세요"
 type FormData = {
@@ -36,9 +36,7 @@ export function PlaceSearchInput() {
         className="flex-1 h-full p-4 bg-white shadow-md border-none"
         {...register('place')}
       />
-      <span className="absolute p-3 inset-y-0 right-0 cursor-pointer">
-        <SearchIcon className="inline text-green-300 w-6 h-6 border-none" />
-      </span>
+      <SearchIcon onClick={handleSubmit(onSubmit)} />
     </form>
   )
 }
