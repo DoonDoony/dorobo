@@ -22,7 +22,7 @@ export function ModalMap({ center, markers, bounds, isFetching }: Props) {
 
   if (isFetching) {
     return (
-      <div className="flex m-4 w-full h-full bg-black justify-center">
+      <div className="flex m-4 w-full h-600 bg-black justify-center">
         <div className="self-center font-sans font-semibold text-white text-lg">
           지도를 불러오는 중입니다 <span className="animate-spin">🤔</span>
         </div>
