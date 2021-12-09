@@ -1,0 +1,21 @@
+{
+  "name": "@dorobo/api",
+  "version": "1.0.0",
+  "description": "DOROBO server API package",
+  "main": "serverless.ts",
+  "engines": {
+    "node": ">=14.15.0"
+  },
+  "dependencies": {
+    "@middy/core": "^2.5.3",
+    "@middy/http-json-body-parser": "^2.5.3"
+  },
+  "devDependencies": {
+    "@serverless/typescript": "^2.23.0",
+    "@types/aws-lambda": "^8.10.71",
+    "json-schema-to-ts": "^1.5.0",
+    "serverless": "^2.23.0",
+    "serverless-esbuild": "^1.17.1",
+    "tsconfig-paths": "^3.9.0"
+  }
+}

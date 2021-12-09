@@ -1,0 +1,61 @@
+{
+  "name": "@dorobo/web",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": {
+    "nohoist": [
+      "craco",
+      "craco/**"
+    ]
+  },
+  "dependencies": {
+    "axios": "^0.24.0",
+    "date-fns": "^2.27.0",
+    "file-saver": "^2.0.5",
+    "lodash": "^4.17.21",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-hook-form": "^7.20.5",
+    "react-kakao-maps-sdk": "^1.0.4",
+    "react-modal": "^3.14.4",
+    "react-query": "^3.34.0",
+    "react-scripts": "4.0.3",
+    "recoil": "^0.5.2",
+    "web-vitals": "^1.0.1",
+    "webpack": "4.44.2"
+  },
+  "devDependencies": {
+    "@craco/craco": "^6.4.2",
+    "@types/file-saver": "^2.0.4",
+    "@types/lodash": "^4.14.177",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@types/react-modal": "^3.13.1",
+    "autoprefixer": "^9",
+    "craco-alias": "^3.0.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-import-resolver-typescript": "^2.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "postcss": "^7",
+    "react-scripts": "4.0.3",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2"
+  },
+  "scripts": {
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
