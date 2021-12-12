@@ -1,19 +1,17 @@
 import { handlerPath } from '@/libs/handlerResolver'
 
-const exportToExcelFunction = {
+const searchFunction = {
   handler: `${handlerPath(__dirname)}/handler.main`,
   events: [
     {
       http: {
         method: 'get',
-        path: 'export',
+        path: 'search',
         cors: true,
         request: {
           parameters: {
             querystrings: {
-              places: true,
-              latitudes: true,
-              longitudes: true,
+              query: true,
             },
           },
         },
@@ -22,4 +20,4 @@ const exportToExcelFunction = {
   ],
 }
 
-export default exportToExcelFunction
+export default searchFunction

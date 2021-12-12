@@ -1,9 +1,9 @@
 export default {
   type: 'object',
   properties: {
-    place: { type: 'string' },
-    x: { type: 'number' },
-    y: { type: 'number' },
+    places: { type: 'array', items: { type: 'string' } },
+    latitudes: { type: 'array', items: { type: 'number' } },
+    longitudes: { type: 'array', items: { type: 'number' } },
   },
-  required: ['place', 'x', 'y'],
+  required: ['places', 'latitudes', 'longitudes'],
 } as const

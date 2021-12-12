@@ -1,6 +1,6 @@
 import { GraphQLClient } from 'graphql-request'
 import { NAVER_PLACE_GRAPHQL_URL } from '@/consts'
-import { flatten, range } from 'lodash'
+import { range } from 'lodash'
 import { Restaurant, Restaurants, RestaurantsInput } from '@dorobo/shared/types'
 import { restaurantDetailsQuery } from '@/graphql/naver/place/queries'
 
@@ -9,9 +9,7 @@ type RestaurantsVariable = {
 }
 
 type RestaurantsResponse = {
-  data: {
-    restaurants: Restaurants
-  }
+  restaurants: Restaurants
 }
 
 class NaverPlaceGraphQLClient extends GraphQLClient {
@@ -36,10 +34,10 @@ class NaverPlaceGraphQLClient extends GraphQLClient {
           y: y.toString(),
         },
       }
-      const { data } = await this.request<RestaurantsResponse>(restaurantDetailsQuery, variables)
-      results.push(...data.restaurants.items)
+      const { restaurants } = await this.request<RestaurantsResponse>(restaurantDetailsQuery, variables)
+      results.push(...restaurants.items)
     }
-    return flatten(results)
+    return results
   }
 }
 

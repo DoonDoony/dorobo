@@ -1,27 +1,39 @@
 import { format } from 'date-fns'
 import { useRecoilValue } from 'recoil'
 import { placeListState } from '@/stores'
-import { downloadExcel } from '@/api'
-import { useCallback } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import FileSaver from 'file-saver'
+import { map } from 'lodash'
+import { useDownload } from '@/hooks'
+import { ExcelDownloadParams } from '@dorobo/shared/types'
+
+const defaultPayload = {
+  places: [],
+  latitudes: [],
+  longitudes: [],
+}
 
 export function DownloadButton() {
+  const [payload, setPayload] = useState<ExcelDownloadParams>(defaultPayload)
+  const { refetch } = useDownload(payload, false)
   const addedPlaces = useRecoilValue(placeListState)
+
+  useEffect(() => {
+    setPayload({
+      places: map(addedPlaces, 'place'),
+      latitudes: map(addedPlaces, 'x'),
+      longitudes: map(addedPlaces, 'y'),
+    })
+  }, [addedPlaces])
+
   const onClick = useCallback(async () => {
-    const payload = {
-      places: addedPlaces.map(({ place, x, y }) => {
-        return {
-          place,
-          x,
-          y,
-        }
-      }),
-    }
-    const response = await downloadExcel(payload)
+    const { data } = await refetch()
+    if (!data) return
     const now = format(new Date(), 'yMd_Hms')
     const filename = `matzip_data_${now}`
-    FileSaver.saveAs(response.data, filename)
-  }, [addedPlaces])
+    FileSaver.saveAs(data.data, filename)
+  }, [refetch])
+
   return (
     <>
       <button className="w-52 p-4 m-2 bg-purple-600 rounded-lg" onClick={onClick}>

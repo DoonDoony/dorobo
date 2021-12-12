@@ -32,5 +32,9 @@
     {
       "path": "packages/web"
     }
+  ],
+  "types": [
+    "node",
+    "kakao.maps.d.ts"
   ]
 }

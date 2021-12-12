@@ -4,8 +4,10 @@
   "workspaces": {
     "packages": [
       "packages/*"
-    ],
-    "nohoist": ["**/craco, **/craco/**"]
+    ]
+  },
+  "scripts": {
+    "start": "lerna run start --parallel --stream"
   },
   "dependencies": {
     "@types/node": "^16.11.12",

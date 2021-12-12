@@ -1,4 +1,4 @@
-import ExcelJS from 'exceljs'
+import * as ExcelJS from 'exceljs'
 import { forEach, toPairs } from 'lodash'
 import { Restaurant } from '@dorobo/shared/types'
 

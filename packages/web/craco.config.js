@@ -18,7 +18,6 @@ module.exports = {
         tsConfigPath: './tsconfig.paths.json',
       },
       overrideCracoConfig: ({ cracoConfig }) => {
-        console.dir(cracoConfig)
         if (typeof cracoConfig.eslint.enable !== 'undefined') {
           cracoConfig.disableEslint = !cracoConfig.eslint.enable
         }

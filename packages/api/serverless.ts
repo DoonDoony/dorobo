@@ -1,11 +1,12 @@
 import type { AWS } from '@serverless/typescript'
 
-import hello from '@functions/hello'
+import exportToExcel from '@/functions/export'
+import search from '@/functions/search'
 
 const serverlessConfiguration: AWS = {
   service: 'dorobo-api',
   frameworkVersion: '2',
-  plugins: ['serverless-esbuild', 'serverless-offline'],
+  plugins: ['serverless-dotenv-plugin', 'serverless-esbuild', 'serverless-offline'],
   provider: {
     name: 'aws',
     runtime: 'nodejs14.x',
@@ -20,7 +21,7 @@ const serverlessConfiguration: AWS = {
     },
     lambdaHashingVersion: '20201221',
   },
-  functions: { hello },
+  functions: { exportToExcel, search },
   package: { individually: true },
   custom: {
     esbuild: {

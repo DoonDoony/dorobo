@@ -1,7 +1,6 @@
 import axios from 'axios'
 import { KakaoPlaceSearchParams, KakaoPlaceSearchResponse } from '@dorobo/shared/types'
-
-const { KAKAO_REST_API_KEY } = process.env
+import { KAKAO_REST_API_KEY } from '@/consts'
 
 const client = axios.create({
   baseURL: 'https://dapi.kakao.com/v2',

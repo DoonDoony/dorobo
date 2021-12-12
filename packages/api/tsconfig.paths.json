@@ -1,6 +1,14 @@
 {
-  "extends": "../../tsconfig.json",
+  // Cannot extend parent's tsconfig.json
   "compilerOptions": {
+    "target": "ESNext",
+    "lib": ["ESNext"],
+    "moduleResolution": "node",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "removeComments": true,
+    "sourceMap": true,
+    "outDir": "lib",
     "baseUrl": "./src",
     "paths": {
       "@/*": ["./*"]

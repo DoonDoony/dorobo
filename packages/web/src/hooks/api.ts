@@ -1,6 +1,7 @@
 import { useQuery } from 'react-query'
 import { downloadExcel, getPlaces } from '@/api'
 import { isEmpty } from 'lodash'
+import { ExcelDownloadParams } from '@dorobo/shared/types'
 
 export function useKeywordSearch(keyword: string) {
   return useQuery(['searchPlaces', keyword], () => getPlaces(keyword), {
@@ -8,10 +9,6 @@ export function useKeywordSearch(keyword: string) {
   })
 }
 
-type Param = {
-  places: { place: string; x?: number; y?: number }[]
-}
-
-export function useDownload(places: Param) {
-  return useQuery(['searchPlaces', places], () => downloadExcel(places))
+export function useDownload(params: ExcelDownloadParams, enabled = false) {
+  return useQuery(['searchPlaces', params], () => downloadExcel(params), { enabled })
 }

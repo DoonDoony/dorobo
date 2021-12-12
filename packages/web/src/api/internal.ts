@@ -1,4 +1,6 @@
 import axios from 'axios'
+import queryString from 'query-string'
+import { ExcelDownloadParams } from '@dorobo/shared/types'
 
 type Document = {
   x: string
@@ -13,7 +15,7 @@ type KeywordSearchResponse = {
 }
 
 const client = axios.create({
-  baseURL: '/.netlify/functions',
+  baseURL: process.env.REACT_APP_API_BASE_URL,
 })
 
 export async function getPlaces(query: string): Promise<KeywordSearchResponse> {
@@ -23,10 +25,12 @@ export async function getPlaces(query: string): Promise<KeywordSearchResponse> {
   return data
 }
 
-type Places = {
-  places: { place: string; x?: number; y?: number }[]
-}
-
-export async function downloadExcel(places: Places) {
-  return await client.post('/export', places, { responseType: 'blob' })
+export async function downloadExcel(params: ExcelDownloadParams) {
+  return await client.get<Blob>('/export', {
+    params,
+    responseType: 'blob',
+    paramsSerializer: params => {
+      return queryString.stringify(params)
+    },
+  })
 }

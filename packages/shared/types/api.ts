@@ -10,7 +10,7 @@ export type PlaceSearchResponse = {
 }
 
 export type ExcelDownloadParams = {
-  place: string
-  x: number
-  y: number
+  places: string[]
+  latitudes: (number | undefined)[]
+  longitudes: (number | undefined)[]
 }
