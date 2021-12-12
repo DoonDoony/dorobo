@@ -24,5 +24,13 @@
     "removeComments": true,
     "sourceMap": true,
     "outDir": "lib"
-  }
+  },
+  "references": [
+    {
+      "path": "packages/api"
+    },
+    {
+      "path": "packages/web"
+    }
+  ]
 }

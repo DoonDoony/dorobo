@@ -2,20 +2,37 @@
   "name": "@dorobo/api",
   "version": "1.0.0",
   "description": "DOROBO server API package",
+  "license": "MIT",
   "main": "serverless.ts",
+  "private": true,
+  "workspaces": {
+    "nohoist": [
+      "serverless",
+      "serverless/**"
+    ]
+  },
   "engines": {
     "node": ">=14.15.0"
   },
+  "scripts": {
+    "start": "sls offline"
+  },
   "dependencies": {
+    "@dorobo/shared": "1.0.0",
     "@middy/core": "^2.5.3",
-    "@middy/http-json-body-parser": "^2.5.3"
+    "@middy/http-json-body-parser": "^2.5.3",
+    "exceljs": "^4.3.0",
+    "graphql-request": "^3.7.0"
   },
   "devDependencies": {
     "@serverless/typescript": "^2.23.0",
     "@types/aws-lambda": "^8.10.71",
+    "@types/exceljs": "^1.3.0",
+    "esbuild": "^0.14.2",
     "json-schema-to-ts": "^1.5.0",
     "serverless": "^2.23.0",
-    "serverless-esbuild": "^1.17.1",
+    "serverless-esbuild": "^1.23.0",
+    "serverless-offline": "^8.3.1",
     "tsconfig-paths": "^3.9.0"
   }
 }

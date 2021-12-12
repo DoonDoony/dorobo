@@ -1,8 +1,12 @@
 import type { APIGatewayProxyEvent, APIGatewayProxyResult, Handler } from 'aws-lambda'
 import type { FromSchema } from 'json-schema-to-ts'
 
-type ValidatedAPIGatewayProxyEvent<S> = Omit<APIGatewayProxyEvent, 'body'> & { body: FromSchema<S> }
-export type ValidatedEventAPIGatewayProxyEvent<S> = Handler<ValidatedAPIGatewayProxyEvent<S>, APIGatewayProxyResult>
+type HttpEvent<S, K extends keyof APIGatewayProxyEvent> = Omit<APIGatewayProxyEvent, K> & Record<K, FromSchema<S>>
+
+export type QueryStringRequiredEvent<S> = Handler<HttpEvent<S, 'queryStringParameters'>, APIGatewayProxyResult>
+export type PathParameterRequiredEvent<S> = Handler<HttpEvent<S, 'pathParameters'>, APIGatewayProxyResult>
+export type BodyRequiredEvent<S> = Handler<HttpEvent<S, 'body'>, APIGatewayProxyResult>
+export type NoneRequiredEvent = Handler<APIGatewayProxyEvent, APIGatewayProxyResult>
 
 export const formatJSONResponse = (response: Record<string, unknown>) => {
   return {
