@@ -15,7 +15,7 @@ const defaultPayload = {
 
 export function DownloadButton() {
   const [payload, setPayload] = useState<ExcelDownloadParams>(defaultPayload)
-  const { refetch } = useDownload(payload, false)
+  const { refetch, isFetching } = useDownload(payload, false)
   const addedPlaces = useRecoilValue(placeListState)
 
   useEffect(() => {
@@ -36,8 +36,12 @@ export function DownloadButton() {
 
   return (
     <>
-      <button className="w-52 p-4 m-2 bg-purple-600 rounded-lg" onClick={onClick}>
-        <span className="text-l text-white font-sans font-medium">💾 아래 목록으로 다운로드</span>
+      <button className="w-52 p-4 m-2 bg-purple-600 rounded-lg" onClick={onClick} disabled={isFetching}>
+        {isFetching ? (
+          <span className="animate-spin text-l text-white font-sans font-medium">다운로드 중 입니다...</span>
+        ) : (
+          <span className="text-l text-white font-sans font-medium">💾 아래 목록으로 다운로드</span>
+        )}
       </button>
     </>
   )
