@@ -25,18 +25,20 @@ jobs:
           REACT_APP_API_BASE_URL=${{ secrets.REACT_APP_API_BASE_URL }}
           EOF
       - uses: aws-actions/configure-aws-credentials@v1
+        name: Setup AWS credentials
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
       - uses: c-hive/gha-yarn-cache@v2
       - uses: borales/actions-yarn@v2.3.0
+        name: Install dependencies
         with:
-          cmd: install
-      - name: check aws bin
-        run: which aws
+          cmd: install --frozen-lockfile
       - uses: borales/actions-yarn@v2.3.0
+        name: Deploy to AWS S3
         with:
-          cmd: workspace @dorobo/web deploy-ci
+          cmd: workspace @dorobo/web deploy
+        shell: bash
         env:
           S3_BUCKET_URI: ${{ secrets.S3_BUCKET_URI }}
