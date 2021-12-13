@@ -33,6 +33,7 @@ const serverlessConfiguration: AWS = {
       define: { 'require.resolve': undefined },
       platform: 'node',
       concurrency: 10,
+      plugins: 'esbuild.plugins.js',
     },
     'serverless-offline': {
       httpPort: 9000,

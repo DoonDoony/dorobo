@@ -8,23 +8,25 @@ import { ExcelDownloadParams } from '@dorobo/shared/types'
 import { toExcelFromRestaurants } from '@/utils'
 
 const exportToExcel: MultiValueQueryStringRequiredEvent<typeof schema> = async event => {
-  const { places, latitudes, longitudes }: ExcelDownloadParams = event.multiValueQueryStringParameters
-  const params = zip(places, latitudes, longitudes)
-  const rows = await Promise.all(
-    params.map(async ([place, x, y]) => {
+  try {
+    const { places, latitudes, longitudes }: ExcelDownloadParams = event.multiValueQueryStringParameters
+    const params = zip(places, latitudes, longitudes)
+    const rows = []
+    for await (const [place, x, y] of params) {
       const restaurants = await naverPlaceClient.getRestaurants(place, x, y)
-      return { [place]: restaurants }
-    })
-  )
-  const buffer = await toExcelFromRestaurants(rows)
-  console.log(rows)
-  return {
-    statusCode: 200,
-    headers: {
-      'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-    },
-    isBase64Encoded: true,
-    body: buffer.toString('base64'),
+      rows.push({ [place]: restaurants })
+    }
+    const buffer = await toExcelFromRestaurants(rows)
+    return {
+      statusCode: 200,
+      headers: {
+        'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      },
+      isBase64Encoded: true,
+      body: buffer.toString('base64'),
+    }
+  } catch (e) {
+    console.error(e)
   }
 }
 

@@ -3,6 +3,7 @@ import { NAVER_PLACE_GRAPHQL_URL } from '@/consts'
 import { range } from 'lodash'
 import { Restaurant, Restaurants, RestaurantsInput } from '@dorobo/shared/types'
 import { restaurantDetailsQuery } from '@/graphql/naver/place/queries'
+import { msleep } from 'sleep'
 
 type RestaurantsVariable = {
   input: RestaurantsInput
@@ -22,7 +23,7 @@ class NaverPlaceGraphQLClient extends GraphQLClient {
   public async getRestaurants(query: string, x: number, y: number) {
     const offsets = range(1, NaverPlaceGraphQLClient.FETCH_LIMIT, NaverPlaceGraphQLClient.FETCH_PER_PAGE)
     const results: Restaurant[] = []
-    for (const offset of offsets) {
+    for await (const offset of offsets) {
       const variables: RestaurantsVariable = {
         input: {
           deviceType: 'pcmap',
@@ -35,6 +36,8 @@ class NaverPlaceGraphQLClient extends GraphQLClient {
         },
       }
       const { restaurants } = await this.request<RestaurantsResponse>(restaurantDetailsQuery, variables)
+      msleep(1000)
+      console.log(new Date().toISOString())
       results.push(...restaurants.items)
     }
     return results
