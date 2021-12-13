@@ -1,4 +1,5 @@
 export * from './modal'
+export * from './icons'
 export * from './Buttons'
 export * from './DownloadButton'
 export * from './PlaceCard'
