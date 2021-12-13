@@ -5,20 +5,19 @@ import schema from './schema'
 import { naverPlaceClient } from '@/graphql/naver/place/client'
 import { zip } from 'lodash'
 import { ExcelDownloadParams } from '@dorobo/shared/types'
-import { toExcelFromRestaurants } from '@/utils'
+import { sleep, toExcelFromRestaurants } from '@/utils'
 
 const exportToExcel: MultiValueQueryStringRequiredEvent<typeof schema> = async event => {
   try {
     const { places, latitudes, longitudes }: ExcelDownloadParams = event.multiValueQueryStringParameters
     const params = zip(places, latitudes, longitudes)
-    const rows = await Promise.all(
-      params.map(async ([place, x, y]) => {
-        const restaurants = await naverPlaceClient.getRestaurants(place, x, y)
-        return { [place]: restaurants }
-      })
-    )
+    const rows = []
+    for await (const [place, x, y] of params) {
+      const restaurants = await naverPlaceClient.getRestaurants(place, x, y)
+      rows.push({ [place]: restaurants })
+      await sleep(300)
+    }
     const buffer = await toExcelFromRestaurants(rows)
-    console.log(rows)
     return {
       statusCode: 200,
       headers: {
