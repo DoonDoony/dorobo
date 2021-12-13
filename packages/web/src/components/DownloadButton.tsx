@@ -6,6 +6,7 @@ import FileSaver from 'file-saver'
 import { map } from 'lodash'
 import { useDownload } from '@/hooks'
 import { ExcelDownloadParams } from '@dorobo/shared/types'
+import { ReactComponent as SpinIcon } from '@/assets/icons/spin.svg'
 
 const defaultPayload = {
   places: [],
@@ -36,9 +37,16 @@ export function DownloadButton() {
 
   return (
     <>
-      <button className="w-52 p-4 m-2 bg-purple-600 rounded-lg" onClick={onClick} disabled={isFetching}>
+      <button
+        className="flex justify-center items-center w-52 p-4 m-2 bg-purple-600 rounded-lg"
+        onClick={onClick}
+        disabled={isFetching}
+      >
         {isFetching ? (
-          <span className="animate-spin text-l text-white font-sans font-medium">다운로드 중 입니다...</span>
+          <>
+            <SpinIcon />
+            <span className="text-l text-white font-sans font-medium">다운로드 중 입니다...</span>
+          </>
         ) : (
           <span className="text-l text-white font-sans font-medium">💾 아래 목록으로 다운로드</span>
         )}
