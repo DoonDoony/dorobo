@@ -42,7 +42,7 @@ export function DownloadButton() {
         onClick={onClick}
         disabled={isFetching}
       >
-        {{ isFetching } ? (
+        {isFetching ? (
           <>
             <SpinIcon />
             <span className="text-l text-white font-sans font-medium">다운로드 중 입니다...</span>
