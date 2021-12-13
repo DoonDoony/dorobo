@@ -36,9 +36,9 @@ jobs:
         with:
           cmd: install --frozen-lockfile
       - uses: borales/actions-yarn@v2.3.0
-        name: Deploy to AWS S3
+        name: Build React project
         with:
-          cmd: workspace @dorobo/web deploy
-        shell: bash
-        env:
-          S3_BUCKET_URI: ${{ secrets.S3_BUCKET_URI }}
+          cmd: workspace @dorobo/web build
+      - name: Deploy to S3
+        run:
+          aws s3 sync ./packages/web/build ${{ secrets.S3_BUCKET_URI }}
