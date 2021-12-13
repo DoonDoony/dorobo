@@ -6,7 +6,7 @@ on:
     paths:
       - 'packages/shared/**'
       - 'packages/web/**'
-      - '.github/**'
+      - '.github/web-deploy.yml'
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -37,6 +37,6 @@ jobs:
         run: which aws
       - uses: borales/actions-yarn@v2.3.0
         with:
-          cmd: workspace @dorobo/web deploy
+          cmd: workspace @dorobo/web deploy-ci
         env:
           S3_BUCKET_URI: ${{ secrets.S3_BUCKET_URI }}
