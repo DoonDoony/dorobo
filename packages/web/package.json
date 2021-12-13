@@ -46,7 +46,7 @@
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject",
-    "deploy": "craco build && zx scripts/deploy-web.mjs --shell bash"
+    "deploy": "craco build && zx scripts/deploy-web.mjs"
   },
   "browserslist": {
     "production": [
