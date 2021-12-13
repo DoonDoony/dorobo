@@ -27,6 +27,9 @@ export async function getPlaces(query: string): Promise<KeywordSearchResponse> {
 
 export async function downloadExcel(params: ExcelDownloadParams) {
   return await client.get<Blob>('/export', {
+    headers: {
+      Accept: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    },
     params,
     responseType: 'blob',
     paramsSerializer: params => {

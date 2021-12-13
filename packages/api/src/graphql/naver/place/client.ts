@@ -35,9 +35,8 @@ class NaverPlaceGraphQLClient extends GraphQLClient {
         },
       }
       const { restaurants } = await this.request<RestaurantsResponse>(restaurantDetailsQuery, variables)
-      await new Promise(resolve => setTimeout(resolve, 1000))
-      console.log(new Date().toISOString())
       results.push(...restaurants.items)
+      await new Promise(resolve => setTimeout(resolve, 1000))
     }
     return results
   }
