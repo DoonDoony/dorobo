@@ -33,6 +33,7 @@
     "@types/react-modal": "^3.13.1",
     "autoprefixer": "^9",
     "craco-alias": "^3.0.1",
+    "craco-esbuild": "^0.4.2",
     "eslint-config-prettier": "^8.3.0",
     "eslint-import-resolver-typescript": "^2.5.0",
     "eslint-plugin-prettier": "^4.0.0",
@@ -44,7 +45,8 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "craco build && zx scripts/deploy-web.mjs"
   },
   "browserslist": {
     "production": [
