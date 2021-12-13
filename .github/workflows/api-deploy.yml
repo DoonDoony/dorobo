@@ -6,7 +6,7 @@ on:
     paths:
       - 'packages/shared/**'
       - 'packages/api/**'
-      - '.github/api-deploy.yml'
+      - '.github/workflows/api-deploy.yml'
 jobs:
   deploy:
     name: deploy
