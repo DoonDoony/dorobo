@@ -17,6 +17,7 @@ const exportToExcel: MultiValueQueryStringRequiredEvent<typeof schema> = async e
     })
   )
   const buffer = await toExcelFromRestaurants(rows)
+  console.log(rows)
   return {
     statusCode: 200,
     headers: {
