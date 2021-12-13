@@ -37,3 +37,4 @@ jobs:
       - uses: serverless/github-action@master
         with:
           args: deploy
+        working-directory: ./packages/api
