@@ -44,4 +44,4 @@ jobs:
           aws s3 sync ./packages/web/build ${{ secrets.S3_BUCKET_URI }}
       - name: Invalidate Cloudfront cache
         run:
-          aws cloudfront create-invalidation --distribution-id ${{ secrets.+S3_DISTRIBUTION_ID }} --paths "/*"
+          aws cloudfront create-invalidation --distribution-id ${{ secrets.S3_DISTRIBUTION_ID }} --paths "/*"
