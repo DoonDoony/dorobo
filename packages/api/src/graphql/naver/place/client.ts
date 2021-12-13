@@ -3,7 +3,6 @@ import { NAVER_PLACE_GRAPHQL_URL } from '@/consts'
 import { range } from 'lodash'
 import { Restaurant, Restaurants, RestaurantsInput } from '@dorobo/shared/types'
 import { restaurantDetailsQuery } from '@/graphql/naver/place/queries'
-import { msleep } from 'sleep'
 
 type RestaurantsVariable = {
   input: RestaurantsInput
@@ -36,7 +35,7 @@ class NaverPlaceGraphQLClient extends GraphQLClient {
         },
       }
       const { restaurants } = await this.request<RestaurantsResponse>(restaurantDetailsQuery, variables)
-      msleep(1000)
+      await new Promise(resolve => setTimeout(resolve, 1000))
       console.log(new Date().toISOString())
       results.push(...restaurants.items)
     }
