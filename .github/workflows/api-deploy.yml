@@ -34,7 +34,6 @@ jobs:
           ALLOWED_ORIGIN=${{ secrets.ALLOWED_ORIGIN }}
           KAKAO_REST_API_KEY=${{ secrets.KAKAO_REST_API_KEY }}
           EOF
-      - uses: serverless/github-action@master
+      - uses: borales/actions-yarn@v2.3.0
         with:
-          args: deploy
-        working-directory: ./packages/api
+          cmd: workspace @dorobo/api deploy

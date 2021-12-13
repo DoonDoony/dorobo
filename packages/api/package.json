@@ -15,7 +15,8 @@
     "node": ">=14.15.0"
   },
   "scripts": {
-    "start": "sls offline"
+    "start": "sls offline",
+    "deploy": "sls deploy"
   },
   "dependencies": {
     "@dorobo/shared": "1.0.0",
