@@ -7,6 +7,8 @@ on:
       - 'packages/shared/**'
       - 'packages/web/**'
       - '.github/workflows/web-deploy.yml'
+      - '!README.md'
+      - '!packages/**/README.md'
   workflow_dispatch:
 jobs:
   deploy:
