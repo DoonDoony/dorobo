@@ -16,7 +16,7 @@ const defaultPayload = {
 
 export function DownloadButton() {
   const [payload, setPayload] = useState<ExcelDownloadParams>(defaultPayload)
-  const { refetch, isFetching } = useDownload(payload, false)
+  const { refetch, isFetching, isError } = useDownload(payload, false)
   const addedPlaces = useRecoilValue(placeListState)
 
   useEffect(() => {
@@ -30,10 +30,11 @@ export function DownloadButton() {
   const onClick = useCallback(async () => {
     const { data } = await refetch()
     if (!data) return
+    if (isError) alert('다운로드 중 문제가 발생했습니다 😭')
     const now = format(new Date(), 'yMd_Hms')
     const filename = `matzip_data_${now}`
     FileSaver.saveAs(data.data, filename)
-  }, [refetch])
+  }, [refetch, isError])
 
   return (
     <>
