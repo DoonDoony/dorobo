@@ -7,6 +7,9 @@ on:
       - 'packages/shared/**'
       - 'packages/api/**'
       - '.github/workflows/api-deploy.yml'
+    paths-ignore:
+      - 'README.md'
+      - 'packages/**/README.md'
   workflow_dispatch:
 jobs:
   deploy:
