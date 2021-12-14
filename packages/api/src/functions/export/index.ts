@@ -4,6 +4,7 @@ const exportToExcelFunction = {
   handler: `${handlerPath(__dirname)}/handler.main`,
   events: [
     {
+      timeout: 30,
       http: {
         method: 'get',
         path: 'export',

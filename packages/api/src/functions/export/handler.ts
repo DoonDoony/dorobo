@@ -13,9 +13,10 @@ const exportToExcel: MultiValueQueryStringRequiredEvent<typeof schema> = async e
     const params = zip(places, latitudes, longitudes)
     const rows = []
     for await (const [place, x, y] of params) {
+      console.log(`Request: ${place}, ${x}, ${y}`)
       const restaurants = await naverPlaceClient.getRestaurants(place, x, y)
       rows.push({ [place]: restaurants })
-      await sleep(300)
+      await sleep(1000)
     }
     const buffer = await toExcelFromRestaurants(rows)
     return {

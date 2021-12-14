@@ -35,9 +35,10 @@ class NaverPlaceGraphQLClient extends GraphQLClient {
           y: y.toString(),
         },
       }
+      console.log(`Get API result: ${variables}`)
       const { restaurants } = await this.request<RestaurantsResponse>(restaurantDetailsQuery, variables)
       results.push(...restaurants.items)
-      await sleep(300)
+      await sleep(500)
     }
     return results
   }
